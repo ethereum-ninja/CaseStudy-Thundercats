@@ -90,6 +90,11 @@ most_boozy$State
 most_bitter = sqldf('SELECT * FROM merged_data ORDER BY IBU DESC')
 most_bitter = head(most_bitter, 1)
 most_bitter$State
+```
 
+## ABV Summary
+
+```{r}
+summary(merged_data$ABV)
 
 ```
