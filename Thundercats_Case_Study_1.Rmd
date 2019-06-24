@@ -4,6 +4,7 @@ output: html_notebook
 ---
 ```{r SETUP}
 library(sqldf)
+library(ggplot2)
 ```
 
 ```{r}
@@ -50,4 +51,45 @@ tail(merged_data, 6)
 
 ```{r}
 summary(merged_data)
+```
+
+## summary stats by state
+
+```{r}
+medians_by_state = group_by(merged_data, State) %>% summarise(
+  median_abv = median(ABV, na.rm=TRUE),
+  median_ibu = median(IBU, na.rm=TRUE)
+)
+```
+
+## Plot of Median ABV By State
+
+```{r}
+#ggboxplot(medians_by_state, x='State', y='median_abv', color = 'State',
+#          #palette=palette(rainbow(length(levels(medians_by_state$State)))),
+#          ylab = 'Median ABV', xlab = 'State'
+#          )
+#ggbarplot(medians_by_state, x='State', y='median_abv')
+
+state_plot = ggplot(medians_by_state, aes(x=medians_by_state$State, y=medians_by_state$median_abv, fill=medians_by_state$State), palette=palette(rainbow(length(levels(medians_by_state$State))))) + geom_bar(stat = "identity") + coord_flip() + labs(x = 'State', y='Median ABV', fill='State') 
+print(state_plot + ggtitle('Median ABV By State') +
+  theme(plot.title = element_text(hjust = 0.5)))
+```
+
+## most booze beer state
+
+```{r}
+most_boozy = sqldf('SELECT * FROM merged_data ORDER BY ABV DESC')
+most_boozy = head(most_boozy, 1)
+most_boozy$State
+```
+
+## most bitter beer state
+
+```{r}
+most_bitter = sqldf('SELECT * FROM merged_data ORDER BY IBU DESC')
+most_bitter = head(most_bitter, 1)
+most_bitter$State
+
+
 ```

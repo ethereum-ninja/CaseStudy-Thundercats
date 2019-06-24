@@ -246,8 +246,9 @@ $(document).ready(function () {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzcWxkZilcbmBgYCJ9 -->
-<pre class="r"><code>library(sqldf)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzcWxkZilcbmxpYnJhcnkoZ2dwbG90MilcbmBgYCJ9 -->
+<pre class="r"><code>library(sqldf)
+library(ggplot2)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -263,19 +264,16 @@ breweries = read.csv('Data/Breweries.csv')</code></pre>
 <h3>Breweries by State</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYnJld2VyaWVzX2J5X3N0YXRlID0gZ3JvdXBfYnkoYnJld2VyaWVzLCBTdGF0ZSkgJT4lIHN1bW1hcmlzZShcbiAgY291bnQgPSBuKClcbilcbmJyZXdlcmllc19ieV9zdGF0ZVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYnJld2VyaWVzX2J5X3N0YXRlID0gZ3JvdXBfYnkoYnJld2VyaWVzLCBTdGF0ZSkgJT4lIHN1bW1hcmlzZShcbiAgY291bnQgPSBuKCksXG4gIG1lZGlhbl9hYnYgPSBtZWRpYW4oQUJWLCBuYS5ybSA9IFRSVUUpLFxuICBtZWRpYW5faWJ1ID0gbWVkaWFuKElCVSwgbmEucm0gPSBUUlVFKVxuKVxuYGBgIn0= -->
 <pre class="r"><code>breweries_by_state = group_by(breweries, State) %&gt;% summarise(
-  count = n()
-)
-breweries_by_state</code></pre>
+  count = n(),
+  median_abv = median(ABV, na.rm = TRUE),
+  median_ibu = median(IBU, na.rm = TRUE)
+)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6NTF9LCJyZGYiOiJINHNJQUFBQUFBQUFCbDJUMjNiU1FCU0dod1NvMEZwVWFtdTEybm8rUWdXV0Q5QUZhckVOZEFFQzlTN1NWRm5HcEF1Q2V1a0wra3JGZjJCUC9zTEZsL3l6c3creko3TmJ0WDRsMjg4cXBXeGxwL0ZNUWFwMDlhUlVmbGRXS21saGxWQkpsZEh2UC9pZWg0RFJ2bzUzWmZaeHRrWTR2SUdPUng2MUFxNEJIYWpUcjRJMW9PUFdRUTdjQURmQkxhRHpib0RiWUJOc2dUdGdHOXdGOThBT3VBOGVnRjJ3Qng2Q1IrQXhlQUtlZ21mZ09YZ0JYb0pYNERWNEF3cWdDUGJCVzFBQzVYa3ZDODJtZmUrWDU0OWxseFd4Mm5zSFI1VEhsQzNLTDdHc0hsQTJLVHV4ckZVcDM4ZnlBL04rWkliRGVpenJ0TlpybEF5ck4ySjUxS1k4amVVeE16aFhKSk01M0k3RHdnN3pPbXpJWVFtSHZUWFlXNE41Rzh6Yk9LVDhST2xRZGltNTlTYkRtdndYVGY2QUV6YlU0dGJiM0U2YjIrbXdvVTQvbHAvWlJaZkp1clQyYU8yeFJJLzc3WjB1WGFmVXdIZkg1amJGZCt6Y0hVVGhDT3BTSnFNaWsyUExWSzNLVGQ2WGFUTFRsaE0vTTNFcG1hSk50VGlKVytLWGtXbFpFMjNKT3k4NVV4Sm5ZaTNacWE2anAxbFAzYmI0SlNWRysrN0lXdnRtcGQ2R2ZFOHVIMEhnL3ZUTUVWakcySTdjeUlzUEtad0UwVHpNbmk0ZFZ2Yk1qZHppK1FoSmxoSm5SdUh2b2ttdVQ5SDZpOGQwT3YwM1A5a0Y1NVh3SWhxR0FWeXR2RFIwdFVwaXRHVElUUUtkK3F3dytENEpmaFJLMHFodVVFbTVoUHc0bzYxNXlhVHBJR1YrdHhkOEd3WnhzNzc3MWZObHNZNFdaaDBVTDBaREhJRzBET3U0R0lXUmEveXlnOUEzbHZtdHVmd1BjWjdSNThJRkFBQT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["State"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["count"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"AK","2":"7"},{"1":"AL","2":"3"},{"1":"AR","2":"2"},{"1":"AZ","2":"11"},{"1":"CA","2":"39"},{"1":"CO","2":"47"},{"1":"CT","2":"8"},{"1":"DC","2":"1"},{"1":"DE","2":"2"},{"1":"FL","2":"15"},{"1":"GA","2":"7"},{"1":"HI","2":"4"},{"1":"IA","2":"5"},{"1":"ID","2":"5"},{"1":"IL","2":"18"},{"1":"IN","2":"22"},{"1":"KS","2":"3"},{"1":"KY","2":"4"},{"1":"LA","2":"5"},{"1":"MA","2":"23"},{"1":"MD","2":"7"},{"1":"ME","2":"9"},{"1":"MI","2":"32"},{"1":"MN","2":"12"},{"1":"MO","2":"9"},{"1":"MS","2":"2"},{"1":"MT","2":"9"},{"1":"NC","2":"19"},{"1":"ND","2":"1"},{"1":"NE","2":"5"},{"1":"NH","2":"3"},{"1":"NJ","2":"3"},{"1":"NM","2":"4"},{"1":"NV","2":"2"},{"1":"NY","2":"16"},{"1":"OH","2":"15"},{"1":"OK","2":"6"},{"1":"OR","2":"29"},{"1":"PA","2":"25"},{"1":"RI","2":"5"},{"1":"SC","2":"4"},{"1":"SD","2":"1"},{"1":"TN","2":"3"},{"1":"TX","2":"28"},{"1":"UT","2":"4"},{"1":"VA","2":"16"},{"1":"VT","2":"10"},{"1":"WA","2":"23"},{"1":"WI","2":"20"},{"1":"WV","2":"1"},{"1":"WY","2":"4"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[51]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gbWVkaWFuKEFCViwgbmEucm0gPSBUUlVFKSA6IG9iamVjdCAnQUJWJyBub3QgZm91bmRcbiJ9 -->
+<pre><code>Error in median(ABV, na.rm = TRUE) : object 'ABV' not found</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -333,36 +331,73 @@ breweries_by_state</code></pre>
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShtZXJnZWRfZGF0YSlcbmBgYCJ9 -->
 <pre class="r"><code>summary(merged_data)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICBOYW1lICAgICAgICAgICAgICBCZWVyX0lEICAgICAgICAgICAgQUJWICAgICAgICAgICAgICAgSUJVICAgICAgICAgICBCcmV3ZXJ5X2lkICAgXG4gTGVuZ3RoOjI0MTAgICAgICAgIE1pbi4gICA6ICAgMS4wICAgTWluLiAgIDowLjAwMTAwICAgTWluLiAgIDogIDQuMDAgICBNaW4uICAgOiAgMS4wICBcbiBDbGFzcyA6Y2hhcmFjdGVyICAgMXN0IFF1LjogODA4LjIgICAxc3QgUXUuOjAuMDUwMDAgICAxc3QgUXUuOiAyMS4wMCAgIDFzdCBRdS46IDk0LjAgIFxuIE1vZGUgIDpjaGFyYWN0ZXIgICBNZWRpYW4gOjE0NTMuNSAgIE1lZGlhbiA6MC4wNTYwMCAgIE1lZGlhbiA6IDM1LjAwICAgTWVkaWFuIDoyMDYuMCAgXG4gICAgICAgICAgICAgICAgICAgIE1lYW4gICA6MTQzMS4xICAgTWVhbiAgIDowLjA1OTc3ICAgTWVhbiAgIDogNDIuNzEgICBNZWFuICAgOjIzMi43ICBcbiAgICAgICAgICAgICAgICAgICAgM3JkIFF1LjoyMDc1LjggICAzcmQgUXUuOjAuMDY3MDAgICAzcmQgUXUuOiA2NC4wMCAgIDNyZCBRdS46MzY3LjAgIFxuICAgICAgICAgICAgICAgICAgICBNYXguICAgOjI2OTIuMCAgIE1heC4gICA6MC4xMjgwMCAgIE1heC4gICA6MTM4LjAwICAgTWF4LiAgIDo1NTguMCAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTkEncyAgIDo2MiAgICAgICAgTkEncyAgIDoxMDA1ICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBTdHlsZSAgICAgICAgICBPdW5jZXMgICAgICAgICBCcmV3X0lEICAgICBcbiBBbWVyaWNhbiBJUEEgICAgICAgICAgICAgICAgICA6IDQyNCAgIE1pbi4gICA6IDguNDAgICBNaW4uICAgOiAgMS4wICBcbiBBbWVyaWNhbiBQYWxlIEFsZSAoQVBBKSAgICAgICA6IDI0NSAgIDFzdCBRdS46MTIuMDAgICAxc3QgUXUuOiA5NC4wICBcbiBBbWVyaWNhbiBBbWJlciAvIFJlZCBBbGUgICAgICA6IDEzMyAgIE1lZGlhbiA6MTIuMDAgICBNZWRpYW4gOjIwNi4wICBcbiBBbWVyaWNhbiBCbG9uZGUgQWxlICAgICAgICAgICA6IDEwOCAgIE1lYW4gICA6MTMuNTkgICBNZWFuICAgOjIzMi43ICBcbiBBbWVyaWNhbiBEb3VibGUgLyBJbXBlcmlhbCBJUEE6IDEwNSAgIDNyZCBRdS46MTYuMDAgICAzcmQgUXUuOjM2Ny4wICBcbiBBbWVyaWNhbiBQYWxlIFdoZWF0IEFsZSAgICAgICA6ICA5NyAgIE1heC4gICA6MzIuMDAgICBNYXguICAgOjU1OC4wICBcbiAoT3RoZXIpICAgICAgICAgICAgICAgICAgICAgICA6MTI5OCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgIE5hbWUuLjkgICAgICAgICAgICAgICAgICAgIENpdHkgICAgICAgICAgU3RhdGUgICAgIFxuIExlbmd0aDoyNDEwICAgICAgICBHcmFuZCBSYXBpZHM6ICA2NiAgICBDTyAgICA6IDI2NSAgXG4gQ2xhc3MgOmNoYXJhY3RlciAgIFBvcnRsYW5kICAgIDogIDY0ICAgIENBICAgIDogMTgzICBcbiBNb2RlICA6Y2hhcmFjdGVyICAgQ2hpY2FnbyAgICAgOiAgNTUgICAgTUkgICAgOiAxNjIgIFxuICAgICAgICAgICAgICAgICAgICBJbmRpYW5hcG9saXM6ICA0MyAgICBJTiAgICA6IDEzOSAgXG4gICAgICAgICAgICAgICAgICAgIFNhbiBEaWVnbyAgIDogIDQyICAgIFRYICAgIDogMTMwICBcbiAgICAgICAgICAgICAgICAgICAgQm91bGRlciAgICAgOiAgNDEgICAgT1IgICAgOiAxMjUgIFxuICAgICAgICAgICAgICAgICAgICAoT3RoZXIpICAgICA6MjA5OSAgIChPdGhlcik6MTQwNiAgXG4ifQ== -->
-<pre><code>     Name              Beer_ID            ABV               IBU           Brewery_id   
- Length:2410        Min.   :   1.0   Min.   :0.00100   Min.   :  4.00   Min.   :  1.0  
- Class :character   1st Qu.: 808.2   1st Qu.:0.05000   1st Qu.: 21.00   1st Qu.: 94.0  
- Mode  :character   Median :1453.5   Median :0.05600   Median : 35.00   Median :206.0  
-                    Mean   :1431.1   Mean   :0.05977   Mean   : 42.71   Mean   :232.7  
-                    3rd Qu.:2075.8   3rd Qu.:0.06700   3rd Qu.: 64.00   3rd Qu.:367.0  
-                    Max.   :2692.0   Max.   :0.12800   Max.   :138.00   Max.   :558.0  
-                                     NA's   :62        NA's   :1005                    
-                            Style          Ounces         Brew_ID     
- American IPA                  : 424   Min.   : 8.40   Min.   :  1.0  
- American Pale Ale (APA)       : 245   1st Qu.:12.00   1st Qu.: 94.0  
- American Amber / Red Ale      : 133   Median :12.00   Median :206.0  
- American Blonde Ale           : 108   Mean   :13.59   Mean   :232.7  
- American Double / Imperial IPA: 105   3rd Qu.:16.00   3rd Qu.:367.0  
- American Pale Wheat Ale       :  97   Max.   :32.00   Max.   :558.0  
- (Other)                       :1298                                  
-   Name..9                    City          State     
- Length:2410        Grand Rapids:  66    CO    : 265  
- Class :character   Portland    :  64    CA    : 183  
- Mode  :character   Chicago     :  55    MI    : 162  
-                    Indianapolis:  43    IN    : 139  
-                    San Diego   :  42    TX    : 130  
-                    Boulder     :  41    OR    : 125  
-                    (Other)     :2099   (Other):1406  </code></pre>
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="summary-stats-by-state" class="section level2">
+<h2>summary stats by state</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubWVkaWFuc19ieV9zdGF0ZSA9IGdyb3VwX2J5KG1lcmdlZF9kYXRhLCBTdGF0ZSkgJT4lIHN1bW1hcmlzZShcbiAgbWVkaWFuX2FidiA9IG1lZGlhbihBQlYsIG5hLnJtPVRSVUUpLFxuICBtZWRpYW5faWJ1ID0gbWVkaWFuKElCVSwgbmEucm09VFJVRSlcbilcbmBgYCJ9 -->
+<pre class="r"><code>medians_by_state = group_by(merged_data, State) %&gt;% summarise(
+  median_abv = median(ABV, na.rm=TRUE),
+  median_ibu = median(IBU, na.rm=TRUE)
+)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="plot-of-median-abv-by-state" class="section level2">
+<h2>Plot of Median ABV By State</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2dnYm94cGxvdChtZWRpYW5zX2J5X3N0YXRlLCB4PSdTdGF0ZScsIHk9J21lZGlhbl9hYnYnLCBjb2xvciA9ICdTdGF0ZScsXG4jICAgICAgICAgICNwYWxldHRlPXBhbGV0dGUocmFpbmJvdyhsZW5ndGgobGV2ZWxzKG1lZGlhbnNfYnlfc3RhdGUkU3RhdGUpKSkpLFxuIyAgICAgICAgICB5bGFiID0gJ01lZGlhbiBBQlYnLCB4bGFiID0gJ1N0YXRlJ1xuIyAgICAgICAgICApXG4jZ2diYXJwbG90KG1lZGlhbnNfYnlfc3RhdGUsIHg9J1N0YXRlJywgeT0nbWVkaWFuX2FidicpXG5cbnN0YXRlX3Bsb3QgPSBnZ3Bsb3QobWVkaWFuc19ieV9zdGF0ZSwgYWVzKHg9bWVkaWFuc19ieV9zdGF0ZSRTdGF0ZSwgeT1tZWRpYW5zX2J5X3N0YXRlJG1lZGlhbl9hYnYsIGZpbGw9bWVkaWFuc19ieV9zdGF0ZSRTdGF0ZSksIHBhbGV0dGU9cGFsZXR0ZShyYWluYm93KGxlbmd0aChsZXZlbHMobWVkaWFuc19ieV9zdGF0ZSRTdGF0ZSkpKSkpICsgZ2VvbV9iYXIoc3RhdCA9IFwiaWRlbnRpdHlcIikgKyBjb29yZF9mbGlwKCkgKyBsYWJzKHggPSAnU3RhdGUnLCB5PSdNZWRpYW4gQUJWJywgZmlsbD0nU3RhdGUnKSBcbnByaW50KHN0YXRlX3Bsb3QgKyBnZ3RpdGxlKCdNZWRpYW4gQUJWIEJ5IFN0YXRlJykgK1xuICB0aGVtZShwbG90LnRpdGxlID0gZWxlbWVudF90ZXh0KGhqdXN0ID0gMC41KSkpXG5gYGAifQ== -->
+<pre class="r"><code>#ggboxplot(medians_by_state, x='State', y='median_abv', color = 'State',
+#          #palette=palette(rainbow(length(levels(medians_by_state$State)))),
+#          ylab = 'Median ABV', xlab = 'State'
+#          )
+#ggbarplot(medians_by_state, x='State', y='median_abv')
+
+state_plot = ggplot(medians_by_state, aes(x=medians_by_state$State, y=medians_by_state$median_abv, fill=medians_by_state$State), palette=palette(rainbow(length(levels(medians_by_state$State))))) + geom_bar(stat = &quot;identity&quot;) + coord_flip() + labs(x = 'State', y='Median ABV', fill='State') 
+print(state_plot + ggtitle('Median ABV By State') +
+  theme(plot.title = element_text(hjust = 0.5)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="most-booze-beer-state" class="section level2">
+<h2>most booze beer state</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW9zdF9ib296eSA9IHNxbGRmKCdTRUxFQ1QgKiBGUk9NIG1lcmdlZF9kYXRhIE9SREVSIEJZIEFCViBERVNDJylcbm1vc3RfYm9venkgPSBoZWFkKG1vc3RfYm9venksIDEpXG5tb3N0X2Jvb3p5JFN0YXRlXG5gYGAifQ== -->
+<pre class="r"><code>most_boozy = sqldf('SELECT * FROM merged_data ORDER BY ABV DESC')
+most_boozy = head(most_boozy, 1)
+most_boozy$State</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdICBDT1xuNTEgTGV2ZWxzOiAgQUsgIEFMICBBUiAgQVogIENBICBDTyAgQ1QgIERDICBERSAgRkwgIEdBICBISSAgSUEgIElEICBJTCAgSU4gIEtTIC4uLiAgV1lcbiJ9 -->
+<pre><code>[1]  CO
+51 Levels:  AK  AL  AR  AZ  CA  CO  CT  DC  DE  FL  GA  HI  IA  ID  IL  IN  KS ...  WY</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="most-bitter-beer-state" class="section level2">
+<h2>most bitter beer state</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW9zdF9iaXR0ZXIgPSBzcWxkZignU0VMRUNUICogRlJPTSBtZXJnZWRfZGF0YSBPUkRFUiBCWSBJQlUgREVTQycpXG5tb3N0X2JpdHRlciA9IGhlYWQobW9zdF9iaXR0ZXIsIDEpXG5tb3N0X2JpdHRlciRTdGF0ZVxuYGBgIn0= -->
+<pre class="r"><code>most_bitter = sqldf('SELECT * FROM merged_data ORDER BY IBU DESC')
+most_bitter = head(most_bitter, 1)
+most_bitter$State</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdICBPUlxuNTEgTGV2ZWxzOiAgQUsgIEFMICBBUiAgQVogIENBICBDTyAgQ1QgIERDICBERSAgRkwgIEdBICBISSAgSUEgIElEICBJTCAgSU4gIEtTIC4uLiAgV1lcbiJ9 -->
+<pre><code>[1]  OR
+51 Levels:  AK  AL  AR  AZ  CA  CO  CT  DC  DE  FL  GA  HI  IA  ID  IL  IN  KS ...  WY</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNhc2UgU3R1ZHkgMSBUaHVuZGVyY2F0cyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpgYGB7ciBTRVRVUH0NCmxpYnJhcnkoc3FsZGYpDQpgYGANCg0KYGBge3J9DQoNCmJlZXJzID0gcmVhZC5jc3YoJ0RhdGEvQmVlcnMuY3N2JykNCmJyZXdlcmllcyA9IHJlYWQuY3N2KCdEYXRhL0JyZXdlcmllcy5jc3YnKQ0KDQpgYGANCg0KIyMjIEJyZXdlcmllcyBieSBTdGF0ZQ0KDQpgYGB7cn0NCmJyZXdlcmllc19ieV9zdGF0ZSA9IGdyb3VwX2J5KGJyZXdlcmllcywgU3RhdGUpICU+JSBzdW1tYXJpc2UoDQogIGNvdW50ID0gbigpDQopDQpicmV3ZXJpZXNfYnlfc3RhdGUNCmBgYA0KDQojIyBNZXJnZSB0aGUgYmVlciBhbmQgYnJldyBkYXRhDQoNCmBgYHtyfQ0KbWVyZ2VkX2RhdGEgPSBzcWxkZignU0VMRUNUICoNCiAgICAgICAgICAgICAgICAgICAgICAgIEZST00gYmVlcnMgYg0KICAgICAgICAgICAgICAgICAgICAgICAgTEVGVCBKT0lOIGJyZXdlcmllcyBiciBPTiBiLkJyZXdlcnlfaWQgPSBici5CcmV3X0lEDQoNCicpDQpgYGANCg0KIyMgVG9wIDYgcm93cw0KDQpgYGB7cn0NCmhlYWQobWVyZ2VkX2RhdGEsIDYpDQoNCmBgYA0KDQojIyBsYXN0IDYgcm93cw0KDQpgYGB7cn0NCnRhaWwobWVyZ2VkX2RhdGEsIDYpDQoNCmBgYA0KDQojIyBOQXMgYnkgY29sdW1uDQoNCmBgYHtyfQ0Kc3VtbWFyeShtZXJnZWRfZGF0YSkNCmBgYA==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNhc2UgU3R1ZHkgMSBUaHVuZGVyY2F0cyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpgYGB7ciBTRVRVUH0NCmxpYnJhcnkoc3FsZGYpDQpsaWJyYXJ5KGdncGxvdDIpDQpgYGANCg0KYGBge3J9DQoNCmJlZXJzID0gcmVhZC5jc3YoJ0RhdGEvQmVlcnMuY3N2JykNCmJyZXdlcmllcyA9IHJlYWQuY3N2KCdEYXRhL0JyZXdlcmllcy5jc3YnKQ0KDQpgYGANCg0KIyMjIEJyZXdlcmllcyBieSBTdGF0ZQ0KDQpgYGB7cn0NCmJyZXdlcmllc19ieV9zdGF0ZSA9IGdyb3VwX2J5KGJyZXdlcmllcywgU3RhdGUpICU+JSBzdW1tYXJpc2UoDQogIGNvdW50ID0gbigpDQopDQpicmV3ZXJpZXNfYnlfc3RhdGUNCmBgYA0KDQojIyBNZXJnZSB0aGUgYmVlciBhbmQgYnJldyBkYXRhDQoNCmBgYHtyfQ0KbWVyZ2VkX2RhdGEgPSBzcWxkZignU0VMRUNUICoNCiAgICAgICAgICAgICAgICAgICAgICAgIEZST00gYmVlcnMgYg0KICAgICAgICAgICAgICAgICAgICAgICAgTEVGVCBKT0lOIGJyZXdlcmllcyBiciBPTiBiLkJyZXdlcnlfaWQgPSBici5CcmV3X0lEDQoNCicpDQpgYGANCg0KIyMgVG9wIDYgcm93cw0KDQpgYGB7cn0NCmhlYWQobWVyZ2VkX2RhdGEsIDYpDQoNCmBgYA0KDQojIyBsYXN0IDYgcm93cw0KDQpgYGB7cn0NCnRhaWwobWVyZ2VkX2RhdGEsIDYpDQoNCmBgYA0KDQojIyBOQXMgYnkgY29sdW1uDQoNCmBgYHtyfQ0Kc3VtbWFyeShtZXJnZWRfZGF0YSkNCmBgYA0KDQojIyBzdW1tYXJ5IHN0YXRzIGJ5IHN0YXRlDQoNCmBgYHtyfQ0KbWVkaWFuc19ieV9zdGF0ZSA9IGdyb3VwX2J5KG1lcmdlZF9kYXRhLCBTdGF0ZSkgJT4lIHN1bW1hcmlzZSgNCiAgbWVkaWFuX2FidiA9IG1lZGlhbihBQlYsIG5hLnJtPVRSVUUpLA0KICBtZWRpYW5faWJ1ID0gbWVkaWFuKElCVSwgbmEucm09VFJVRSkNCikNCmBgYA0KDQojIyBQbG90IG9mIE1lZGlhbiBBQlYgQnkgU3RhdGUNCg0KYGBge3J9DQojZ2dib3hwbG90KG1lZGlhbnNfYnlfc3RhdGUsIHg9J1N0YXRlJywgeT0nbWVkaWFuX2FidicsIGNvbG9yID0gJ1N0YXRlJywNCiMgICAgICAgICAgI3BhbGV0dGU9cGFsZXR0ZShyYWluYm93KGxlbmd0aChsZXZlbHMobWVkaWFuc19ieV9zdGF0ZSRTdGF0ZSkpKSksDQojICAgICAgICAgIHlsYWIgPSAnTWVkaWFuIEFCVicsIHhsYWIgPSAnU3RhdGUnDQojICAgICAgICAgICkNCiNnZ2JhcnBsb3QobWVkaWFuc19ieV9zdGF0ZSwgeD0nU3RhdGUnLCB5PSdtZWRpYW5fYWJ2JykNCg0Kc3RhdGVfcGxvdCA9IGdncGxvdChtZWRpYW5zX2J5X3N0YXRlLCBhZXMoeD1tZWRpYW5zX2J5X3N0YXRlJFN0YXRlLCB5PW1lZGlhbnNfYnlfc3RhdGUkbWVkaWFuX2FidiwgZmlsbD1tZWRpYW5zX2J5X3N0YXRlJFN0YXRlKSwgcGFsZXR0ZT1wYWxldHRlKHJhaW5ib3cobGVuZ3RoKGxldmVscyhtZWRpYW5zX2J5X3N0YXRlJFN0YXRlKSkpKSkgKyBnZW9tX2JhcihzdGF0ID0gImlkZW50aXR5IikgKyBjb29yZF9mbGlwKCkgKyBsYWJzKHggPSAnU3RhdGUnLCB5PSdNZWRpYW4gQUJWJywgZmlsbD0nU3RhdGUnKSANCnByaW50KHN0YXRlX3Bsb3QgKyBnZ3RpdGxlKCdNZWRpYW4gQUJWIEJ5IFN0YXRlJykgKw0KICB0aGVtZShwbG90LnRpdGxlID0gZWxlbWVudF90ZXh0KGhqdXN0ID0gMC41KSkpDQpgYGANCg0KIyMgbW9zdCBib296ZSBiZWVyIHN0YXRlDQoNCmBgYHtyfQ0KbW9zdF9ib296eSA9IHNxbGRmKCdTRUxFQ1QgKiBGUk9NIG1lcmdlZF9kYXRhIE9SREVSIEJZIEFCViBERVNDJykNCm1vc3RfYm9venkgPSBoZWFkKG1vc3RfYm9venksIDEpDQptb3N0X2Jvb3p5JFN0YXRlDQpgYGANCg0KIyMgbW9zdCBiaXR0ZXIgYmVlciBzdGF0ZQ0KDQpgYGB7cn0NCm1vc3RfYml0dGVyID0gc3FsZGYoJ1NFTEVDVCAqIEZST00gbWVyZ2VkX2RhdGEgT1JERVIgQlkgSUJVIERFU0MnKQ0KbW9zdF9iaXR0ZXIgPSBoZWFkKG1vc3RfYml0dGVyLCAxKQ0KbW9zdF9iaXR0ZXIkU3RhdGUNCg0KDQpgYGA=</div>
 
 
 
