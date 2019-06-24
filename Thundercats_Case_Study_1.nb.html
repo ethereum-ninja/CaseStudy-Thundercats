@@ -324,9 +324,45 @@ breweries_by_state</code></pre>
 </div>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="nas-by-column" class="section level2">
+<h2>NAs by column</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShtZXJnZWRfZGF0YSlcbmBgYCJ9 -->
+<pre class="r"><code>summary(merged_data)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBOYW1lICAgICAgICAgICAgICBCZWVyX0lEICAgICAgICAgICAgQUJWICAgICAgICAgICAgICAgSUJVICAgICAgICAgICBCcmV3ZXJ5X2lkICAgXG4gTGVuZ3RoOjI0MTAgICAgICAgIE1pbi4gICA6ICAgMS4wICAgTWluLiAgIDowLjAwMTAwICAgTWluLiAgIDogIDQuMDAgICBNaW4uICAgOiAgMS4wICBcbiBDbGFzcyA6Y2hhcmFjdGVyICAgMXN0IFF1LjogODA4LjIgICAxc3QgUXUuOjAuMDUwMDAgICAxc3QgUXUuOiAyMS4wMCAgIDFzdCBRdS46IDk0LjAgIFxuIE1vZGUgIDpjaGFyYWN0ZXIgICBNZWRpYW4gOjE0NTMuNSAgIE1lZGlhbiA6MC4wNTYwMCAgIE1lZGlhbiA6IDM1LjAwICAgTWVkaWFuIDoyMDYuMCAgXG4gICAgICAgICAgICAgICAgICAgIE1lYW4gICA6MTQzMS4xICAgTWVhbiAgIDowLjA1OTc3ICAgTWVhbiAgIDogNDIuNzEgICBNZWFuICAgOjIzMi43ICBcbiAgICAgICAgICAgICAgICAgICAgM3JkIFF1LjoyMDc1LjggICAzcmQgUXUuOjAuMDY3MDAgICAzcmQgUXUuOiA2NC4wMCAgIDNyZCBRdS46MzY3LjAgIFxuICAgICAgICAgICAgICAgICAgICBNYXguICAgOjI2OTIuMCAgIE1heC4gICA6MC4xMjgwMCAgIE1heC4gICA6MTM4LjAwICAgTWF4LiAgIDo1NTguMCAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTkEncyAgIDo2MiAgICAgICAgTkEncyAgIDoxMDA1ICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBTdHlsZSAgICAgICAgICBPdW5jZXMgICAgICAgICBCcmV3X0lEICAgICBcbiBBbWVyaWNhbiBJUEEgICAgICAgICAgICAgICAgICA6IDQyNCAgIE1pbi4gICA6IDguNDAgICBNaW4uICAgOiAgMS4wICBcbiBBbWVyaWNhbiBQYWxlIEFsZSAoQVBBKSAgICAgICA6IDI0NSAgIDFzdCBRdS46MTIuMDAgICAxc3QgUXUuOiA5NC4wICBcbiBBbWVyaWNhbiBBbWJlciAvIFJlZCBBbGUgICAgICA6IDEzMyAgIE1lZGlhbiA6MTIuMDAgICBNZWRpYW4gOjIwNi4wICBcbiBBbWVyaWNhbiBCbG9uZGUgQWxlICAgICAgICAgICA6IDEwOCAgIE1lYW4gICA6MTMuNTkgICBNZWFuICAgOjIzMi43ICBcbiBBbWVyaWNhbiBEb3VibGUgLyBJbXBlcmlhbCBJUEE6IDEwNSAgIDNyZCBRdS46MTYuMDAgICAzcmQgUXUuOjM2Ny4wICBcbiBBbWVyaWNhbiBQYWxlIFdoZWF0IEFsZSAgICAgICA6ICA5NyAgIE1heC4gICA6MzIuMDAgICBNYXguICAgOjU1OC4wICBcbiAoT3RoZXIpICAgICAgICAgICAgICAgICAgICAgICA6MTI5OCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgIE5hbWUuLjkgICAgICAgICAgICAgICAgICAgIENpdHkgICAgICAgICAgU3RhdGUgICAgIFxuIExlbmd0aDoyNDEwICAgICAgICBHcmFuZCBSYXBpZHM6ICA2NiAgICBDTyAgICA6IDI2NSAgXG4gQ2xhc3MgOmNoYXJhY3RlciAgIFBvcnRsYW5kICAgIDogIDY0ICAgIENBICAgIDogMTgzICBcbiBNb2RlICA6Y2hhcmFjdGVyICAgQ2hpY2FnbyAgICAgOiAgNTUgICAgTUkgICAgOiAxNjIgIFxuICAgICAgICAgICAgICAgICAgICBJbmRpYW5hcG9saXM6ICA0MyAgICBJTiAgICA6IDEzOSAgXG4gICAgICAgICAgICAgICAgICAgIFNhbiBEaWVnbyAgIDogIDQyICAgIFRYICAgIDogMTMwICBcbiAgICAgICAgICAgICAgICAgICAgQm91bGRlciAgICAgOiAgNDEgICAgT1IgICAgOiAxMjUgIFxuICAgICAgICAgICAgICAgICAgICAoT3RoZXIpICAgICA6MjA5OSAgIChPdGhlcik6MTQwNiAgXG4ifQ== -->
+<pre><code>     Name              Beer_ID            ABV               IBU           Brewery_id   
+ Length:2410        Min.   :   1.0   Min.   :0.00100   Min.   :  4.00   Min.   :  1.0  
+ Class :character   1st Qu.: 808.2   1st Qu.:0.05000   1st Qu.: 21.00   1st Qu.: 94.0  
+ Mode  :character   Median :1453.5   Median :0.05600   Median : 35.00   Median :206.0  
+                    Mean   :1431.1   Mean   :0.05977   Mean   : 42.71   Mean   :232.7  
+                    3rd Qu.:2075.8   3rd Qu.:0.06700   3rd Qu.: 64.00   3rd Qu.:367.0  
+                    Max.   :2692.0   Max.   :0.12800   Max.   :138.00   Max.   :558.0  
+                                     NA's   :62        NA's   :1005                    
+                            Style          Ounces         Brew_ID     
+ American IPA                  : 424   Min.   : 8.40   Min.   :  1.0  
+ American Pale Ale (APA)       : 245   1st Qu.:12.00   1st Qu.: 94.0  
+ American Amber / Red Ale      : 133   Median :12.00   Median :206.0  
+ American Blonde Ale           : 108   Mean   :13.59   Mean   :232.7  
+ American Double / Imperial IPA: 105   3rd Qu.:16.00   3rd Qu.:367.0  
+ American Pale Wheat Ale       :  97   Max.   :32.00   Max.   :558.0  
+ (Other)                       :1298                                  
+   Name..9                    City          State     
+ Length:2410        Grand Rapids:  66    CO    : 265  
+ Class :character   Portland    :  64    CA    : 183  
+ Mode  :character   Chicago     :  55    MI    : 162  
+                    Indianapolis:  43    IN    : 139  
+                    San Diego   :  42    TX    : 130  
+                    Boulder     :  41    OR    : 125  
+                    (Other)     :2099   (Other):1406  </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNhc2UgU3R1ZHkgMSBUaHVuZGVyY2F0cyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpgYGB7ciBTRVRVUH0NCmxpYnJhcnkoc3FsZGYpDQpgYGANCg0KYGBge3J9DQoNCmJlZXJzID0gcmVhZC5jc3YoJ0RhdGEvQmVlcnMuY3N2JykNCmJyZXdlcmllcyA9IHJlYWQuY3N2KCdEYXRhL0JyZXdlcmllcy5jc3YnKQ0KDQpgYGANCg0KIyMjIEJyZXdlcmllcyBieSBTdGF0ZQ0KDQpgYGB7cn0NCmJyZXdlcmllc19ieV9zdGF0ZSA9IGdyb3VwX2J5KGJyZXdlcmllcywgU3RhdGUpICU+JSBzdW1tYXJpc2UoDQogIGNvdW50ID0gbigpDQopDQpicmV3ZXJpZXNfYnlfc3RhdGUNCmBgYA0KDQojIyBNZXJnZSB0aGUgYmVlciBhbmQgYnJldyBkYXRhDQoNCmBgYHtyfQ0KbWVyZ2VkX2RhdGEgPSBzcWxkZignU0VMRUNUICoNCiAgICAgICAgICAgICAgICAgICAgICAgIEZST00gYmVlcnMgYg0KICAgICAgICAgICAgICAgICAgICAgICAgTEVGVCBKT0lOIGJyZXdlcmllcyBiciBPTiBiLkJyZXdlcnlfaWQgPSBici5CcmV3X0lEDQoNCicpDQpgYGANCg0KIyMgVG9wIDYgcm93cw0KDQpgYGB7cn0NCmhlYWQobWVyZ2VkX2RhdGEsIDYpDQoNCmBgYA0KDQojIyBsYXN0IDYgcm93cw0KDQpgYGB7cn0NCnRhaWwobWVyZ2VkX2RhdGEsIDYpDQoNCmBgYA0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNhc2UgU3R1ZHkgMSBUaHVuZGVyY2F0cyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpgYGB7ciBTRVRVUH0NCmxpYnJhcnkoc3FsZGYpDQpgYGANCg0KYGBge3J9DQoNCmJlZXJzID0gcmVhZC5jc3YoJ0RhdGEvQmVlcnMuY3N2JykNCmJyZXdlcmllcyA9IHJlYWQuY3N2KCdEYXRhL0JyZXdlcmllcy5jc3YnKQ0KDQpgYGANCg0KIyMjIEJyZXdlcmllcyBieSBTdGF0ZQ0KDQpgYGB7cn0NCmJyZXdlcmllc19ieV9zdGF0ZSA9IGdyb3VwX2J5KGJyZXdlcmllcywgU3RhdGUpICU+JSBzdW1tYXJpc2UoDQogIGNvdW50ID0gbigpDQopDQpicmV3ZXJpZXNfYnlfc3RhdGUNCmBgYA0KDQojIyBNZXJnZSB0aGUgYmVlciBhbmQgYnJldyBkYXRhDQoNCmBgYHtyfQ0KbWVyZ2VkX2RhdGEgPSBzcWxkZignU0VMRUNUICoNCiAgICAgICAgICAgICAgICAgICAgICAgIEZST00gYmVlcnMgYg0KICAgICAgICAgICAgICAgICAgICAgICAgTEVGVCBKT0lOIGJyZXdlcmllcyBiciBPTiBiLkJyZXdlcnlfaWQgPSBici5CcmV3X0lEDQoNCicpDQpgYGANCg0KIyMgVG9wIDYgcm93cw0KDQpgYGB7cn0NCmhlYWQobWVyZ2VkX2RhdGEsIDYpDQoNCmBgYA0KDQojIyBsYXN0IDYgcm93cw0KDQpgYGB7cn0NCnRhaWwobWVyZ2VkX2RhdGEsIDYpDQoNCmBgYA0KDQojIyBOQXMgYnkgY29sdW1uDQoNCmBgYHtyfQ0Kc3VtbWFyeShtZXJnZWRfZGF0YSkNCmBgYA==</div>
 
 
 
