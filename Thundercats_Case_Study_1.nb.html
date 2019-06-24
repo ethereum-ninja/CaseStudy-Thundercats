@@ -246,18 +246,40 @@ $(document).ready(function () {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxucGxvdChjYXJzKVxuYGBgXG5gYGAifQ== -->
-<p><code>r</code>r plot(cars)</p>
-<pre><code></code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzcWxkZilcbmBgYCJ9 -->
+<pre class="r"><code>library(sqldf)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Add a new chunk by clicking the <em>Insert Chunk</em> button on the toolbar or by pressing <em>Ctrl+Alt+I</em>.</p>
-<p>When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the <em>Preview</em> button or press <em>Ctrl+Shift+K</em> to preview the HTML file).</p>
-<p>The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike <em>Knit</em>, <em>Preview</em> does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmVlcnMgPSByZWFkLmNzdignRGF0YS9CZWVycy5jc3YnKVxuYnJld2VyaWVzID0gcmVhZC5jc3YoJ0RhdGEvQnJld2VyaWVzLmNzdicpXG5gYGAifQ== -->
+<pre class="r"><code>beers = read.csv('Data/Beers.csv')
+breweries = read.csv('Data/Breweries.csv')</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="breweries-by-state" class="section level3">
+<h3>Breweries by State</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYnJld2VyaWVzX2J5X3N0YXRlID0gZ3JvdXBfYnkoYnJld2VyaWVzLCBTdGF0ZSkgJT4lIHN1bW1hcmlzZShcbiAgY291bnQgPSBuKClcbilcbmJyZXdlcmllc19ieV9zdGF0ZVxuYGBgIn0= -->
+<pre class="r"><code>breweries_by_state = group_by(breweries, State) %&gt;% summarise(
+  count = n()
+)
+breweries_by_state</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6NTF9LCJyZGYiOiJINHNJQUFBQUFBQUFCbDJUMjNiU1FCU0dod1NvMEZwVWFtdTEybm8rUWdXV0Q5QUZhckVOZEFFQzlTN1NWRm5HcEF1Q2V1a0wra3JGZjJCUC9zTEZsL3l6c3creko3TmJ0WDRsMjg4cXBXeGxwL0ZNUWFwMDlhUlVmbGRXS21saGxWQkpsZEh2UC9pZWg0RFJ2bzUzWmZaeHRrWTR2SUdPUng2MUFxNEJIYWpUcjRJMW9PUFdRUTdjQURmQkxhRHpib0RiWUJOc2dUdGdHOXdGOThBT3VBOGVnRjJ3Qng2Q1IrQXhlQUtlZ21mZ09YZ0JYb0pYNERWNEF3cWdDUGJCVzFBQzVYa3ZDODJtZmUrWDU0OWxseFd4Mm5zSFI1VEhsQzNLTDdHc0hsQTJLVHV4ckZVcDM4ZnlBL04rWkliRGVpenJ0TlpybEF5ck4ySjUxS1k4amVVeE16aFhKSk01M0k3RHdnN3pPbXpJWVFtSHZUWFlXNE41Rzh6Yk9LVDhST2xRZGltNTlTYkRtdndYVGY2QUV6YlU0dGJiM0U2YjIrbXdvVTQvbHAvWlJaZkp1clQyYU8yeFJJLzc3WjB1WGFmVXdIZkg1amJGZCt6Y0hVVGhDT3BTSnFNaWsyUExWSzNLVGQ2WGFUTFRsaE0vTTNFcG1hSk50VGlKVytLWGtXbFpFMjNKT3k4NVV4Sm5ZaTNacWE2anAxbFAzYmI0SlNWRysrN0lXdnRtcGQ2R2ZFOHVIMEhnL3ZUTUVWakcySTdjeUlzUEtad0UwVHpNbmk0ZFZ2Yk1qZHppK1FoSmxoSm5SdUh2b2ttdVQ5SDZpOGQwT3YwM1A5a0Y1NVh3SWhxR0FWeXR2RFIwdFVwaXRHVElUUUtkK3F3dytENEpmaFJLMHFodVVFbTVoUHc0bzYxNXlhVHBJR1YrdHhkOEd3WnhzNzc3MWZObHNZNFdaaDBVTDBaREhJRzBET3U0R0lXUmEveXlnOUEzbHZtdHVmd1BjWjdSNThJRkFBQT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["State"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["count"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"AK","2":"7"},{"1":"AL","2":"3"},{"1":"AR","2":"2"},{"1":"AZ","2":"11"},{"1":"CA","2":"39"},{"1":"CO","2":"47"},{"1":"CT","2":"8"},{"1":"DC","2":"1"},{"1":"DE","2":"2"},{"1":"FL","2":"15"},{"1":"GA","2":"7"},{"1":"HI","2":"4"},{"1":"IA","2":"5"},{"1":"ID","2":"5"},{"1":"IL","2":"18"},{"1":"IN","2":"22"},{"1":"KS","2":"3"},{"1":"KY","2":"4"},{"1":"LA","2":"5"},{"1":"MA","2":"23"},{"1":"MD","2":"7"},{"1":"ME","2":"9"},{"1":"MI","2":"32"},{"1":"MN","2":"12"},{"1":"MO","2":"9"},{"1":"MS","2":"2"},{"1":"MT","2":"9"},{"1":"NC","2":"19"},{"1":"ND","2":"1"},{"1":"NE","2":"5"},{"1":"NH","2":"3"},{"1":"NJ","2":"3"},{"1":"NM","2":"4"},{"1":"NV","2":"2"},{"1":"NY","2":"16"},{"1":"OH","2":"15"},{"1":"OK","2":"6"},{"1":"OR","2":"29"},{"1":"PA","2":"25"},{"1":"RI","2":"5"},{"1":"SC","2":"4"},{"1":"SD","2":"1"},{"1":"TN","2":"3"},{"1":"TX","2":"28"},{"1":"UT","2":"4"},{"1":"VA","2":"16"},{"1":"VT","2":"10"},{"1":"WA","2":"23"},{"1":"WI","2":"20"},{"1":"WV","2":"1"},{"1":"WY","2":"4"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[51]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNhc2UgU3R1ZHkgMSBUaHVuZGVyY2F0cyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCg0KYGBge3J9DQpiZWVycyA9IHJlYWQuY3N2KCcpDQpgYGANCg0KQWRkIGEgbmV3IGNodW5rIGJ5IGNsaWNraW5nIHRoZSAqSW5zZXJ0IENodW5rKiBidXR0b24gb24gdGhlIHRvb2xiYXIgb3IgYnkgcHJlc3NpbmcgKkN0cmwrQWx0K0kqLg0KDQpXaGVuIHlvdSBzYXZlIHRoZSBub3RlYm9vaywgYW4gSFRNTCBmaWxlIGNvbnRhaW5pbmcgdGhlIGNvZGUgYW5kIG91dHB1dCB3aWxsIGJlIHNhdmVkIGFsb25nc2lkZSBpdCAoY2xpY2sgdGhlICpQcmV2aWV3KiBidXR0b24gb3IgcHJlc3MgKkN0cmwrU2hpZnQrSyogdG8gcHJldmlldyB0aGUgSFRNTCBmaWxlKS4NCg0KVGhlIHByZXZpZXcgc2hvd3MgeW91IGEgcmVuZGVyZWQgSFRNTCBjb3B5IG9mIHRoZSBjb250ZW50cyBvZiB0aGUgZWRpdG9yLiBDb25zZXF1ZW50bHksIHVubGlrZSAqS25pdCosICpQcmV2aWV3KiBkb2VzIG5vdCBydW4gYW55IFIgY29kZSBjaHVua3MuIEluc3RlYWQsIHRoZSBvdXRwdXQgb2YgdGhlIGNodW5rIHdoZW4gaXQgd2FzIGxhc3QgcnVuIGluIHRoZSBlZGl0b3IgaXMgZGlzcGxheWVkLg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkNhc2UgU3R1ZHkgMSBUaHVuZGVyY2F0cyINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQpgYGB7ciBTRVRVUH0NCmxpYnJhcnkoc3FsZGYpDQpgYGANCg0KYGBge3J9DQoNCmJlZXJzID0gcmVhZC5jc3YoJ0RhdGEvQmVlcnMuY3N2JykNCmJyZXdlcmllcyA9IHJlYWQuY3N2KCdEYXRhL0JyZXdlcmllcy5jc3YnKQ0KDQpgYGANCg0KIyMjIEJyZXdlcmllcyBieSBTdGF0ZQ0KDQpgYGB7cn0NCmJyZXdlcmllc19ieV9zdGF0ZSA9IGdyb3VwX2J5KGJyZXdlcmllcywgU3RhdGUpICU+JSBzdW1tYXJpc2UoDQogIGNvdW50ID0gbigpDQopDQpicmV3ZXJpZXNfYnlfc3RhdGUNCmBgYA0K</div>
 
 
 
