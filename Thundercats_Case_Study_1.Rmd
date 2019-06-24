@@ -21,3 +21,27 @@ breweries_by_state = group_by(breweries, State) %>% summarise(
 )
 breweries_by_state
 ```
+
+## Merge the beer and brew data
+
+```{r}
+merged_data = sqldf('SELECT *
+                        FROM beers b
+                        LEFT JOIN breweries br ON b.Brewery_id = br.Brew_ID
+
+')
+```
+
+## Top 6 rows
+
+```{r}
+head(merged_data, 6)
+
+```
+
+## last 6 rows
+
+```{r}
+tail(merged_data, 6)
+
+```
