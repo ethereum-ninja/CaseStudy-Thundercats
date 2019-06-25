@@ -2,7 +2,35 @@
 title: "Case Study 1 Thundercats"
 output: html_notebook
 ---
-```{r SETUP}
+```{r include = FALSE}
+knitr::opts_chunk$set(echo=FALSE)
+```
+# Beer: 
+   Humans have been consuming alcohol in its various forms for millenia. Fermentation
+   is an art that we have perfected as a species. Beer ddrinkers are notoriously picky about
+   the type of beer they consume, many prefer lower alcohol content varieties becuase they 
+   prefer to drink for longer periods of time, others prefer a stronger brew and prefer to 
+   drink beer for its flavor content rather than its intoxicating effects. Other drinkers
+   prefer both - a beer that is easy to drink (low ABV) but with more flavor/body (higher      IBU). 
+   
+### In which state can we find the strongest brew?
+
+   Strength of beer is usually characterized by the ABV (Alcohol Content By Volume)
+   
+   By analyzing the distrubution of ABV by state, we will attempt to answer this important QOI
+   
+### Where is the beer most bitter?
+   
+   Bitterness of beer is usually characterized by the IBU (International Bitterness Unit)
+   
+   By analyzing the distrubution of IBU by state, we will attempt to answer this important QOI 
+   
+### Data
+   
+   To investiage these QOIs - we will use an observational study conducted across all 50 states (except North Dakota?) to rank 2305 indivdual brews on their strength and bitterness. Unfortunately - our dataset is rather sparsely populated for IBU data making any inferences on this variable subject to skepticism and further investigation.
+
+
+```{r ECHO=TRUE}
 library(sqldf)
 library(ggplot2)
 ```
@@ -11,19 +39,11 @@ library(ggplot2)
 
 beers = read.csv('Data/Beers.csv')
 breweries = read.csv('Data/Breweries.csv')
-
+states = read.csv('Data/StatesByRegion.csv')
+breweries = sqldf('SELECT * FROM breweries b LEFT JOIN states s ON s.Code = b.State')
 ```
 
-### Breweries by State
-
-```{r}
-breweries_by_state = group_by(breweries, State) %>% summarise(
-  count = n()
-)
-breweries_by_state
-```
-
-## Merge the beer and brew data
+### Merge the beer and brew data
 
 ```{r}
 merged_data = sqldf('SELECT *
@@ -36,65 +56,212 @@ merged_data = sqldf('SELECT *
 ## Top 6 rows
 
 ```{r}
-head(merged_data, 6)
+top_6 = data.frame(head(merged_data, 6))
+top_6
 
 ```
 
 ## last 6 rows
 
 ```{r}
-tail(merged_data, 6)
-
+bottom_6 = data.frame(tail(merged_data, 6))
+bottom_6
 ```
 
-## NAs by column
+### Breweries by State
+    
+    Breweries seem to be concentrated highly in the top 5 states (CO, CA, MI, OR and TX)
+    Comprising 175 of the 558 breweries in the study
+    
+```{r}
+breweries_by_state = group_by(breweries, State) %>% summarise(
+  count = n()
+)
+breweries_by_state[order(-breweries_by_state$count), ]
+```
 
+### By region?
+    
+    Micro brews abound out west!
+    
+    188 of the breweries in the study were located out west. If one were to target places to     sell beer, the left coast would be an ideal place to start
+```{r}
+breweries_by_region = group_by(breweries, Region) %>% summarise(
+  count = n()
+)
+breweries_by_region[order(-breweries_by_region$count), ]
+
+```
+## Best Cities for a Beer Tour
+  
+  Want to check out a tour of local microbreweries? These cities are the top 5 when it 
+  comes to craft beer specials!
+  
+  Portland here we come!
+  
+```{r}
+breweries_by_city = group_by(breweries, City)  %>% summarise(
+  count = n()
+)
+
+top_5_cities = data.frame(head(breweries_by_city[order(-breweries_by_city$count), ], 5))
+top_5_cities
+```
+
+
+
+## NAs by column
+  As noted in the introduction - IBU data is not widely available (1005 NA values)
+  
+  ABV - on the other hand - is required to be placed on the label of nearly all brews, hence   the data is much more reliable for that metric.
+  
+  Overall- the most represented (and potentially most popular) style of beer is the American   IPA (making up roughly 20% of the overall study)
+  
+  The state with the most beers sampled overall was Colorado. A state known for its liberal 
+  policies surrounding consumption of quasi-illicit substances.
+  
 ```{r}
 summary(merged_data)
 ```
 
-## summary stats by state
+## effect of all the missing IBU data?
+    
+    Lots of beers were not categorized by IBU (almost half!)
+    
+    A large chunk of these beers were IPAs, which are generally assumed to have higher IBU values
 
+```{r}
+no_ibu = merged_data[is.na(merged_data$IBU), ]
+summary(no_ibu)
+```
+## Average IBU by Beer Type
+
+```{r}
+beers_by_type = group_by(merged_data, Style)  %>% summarise(
+  average_ibu = mean(IBU, na.rm = TRUE)
+)
+beers_by_type[order(-beers_by_type$average_ibu), ]
+```
+
+
+## summary stats by state
+    
+    Like strong flavored beer? Visit Maine! 
+    
+    Prefer to get a bit more buzzed? Check out the state capitol and have a beer with the       President! He's not always drunk - it just seems that way!
 ```{r}
 medians_by_state = group_by(merged_data, State) %>% summarise(
   median_abv = median(ABV, na.rm=TRUE),
   median_ibu = median(IBU, na.rm=TRUE)
 )
+
+medians_by_region = group_by(merged_data, Region) %>% summarise(
+  median_abv = median(ABV, na.rm=TRUE),
+  median_ibu = median(IBU, na.rm=TRUE)
+)
+
+medians_by_state[order(-medians_by_state$median_ibu), ]
+
+medians_by_state[order(-medians_by_state$median_abv), ]
+
+medians_by_region[order(-medians_by_region$median_ibu), ]
+
+medians_by_region[order(-medians_by_region$median_abv), ]
 ```
 
-## Plot of Median ABV By State
-
+## Plot of Median ABV By State and Region
+  
+    Don't go to South Dakota if you like bitter beer, there may not be any....
+    
+    If you prefer a nice mix of ABV/IBU - head west, friend, there's gold out there!
 ```{r}
-#ggboxplot(medians_by_state, x='State', y='median_abv', color = 'State',
-#          #palette=palette(rainbow(length(levels(medians_by_state$State)))),
-#          ylab = 'Median ABV', xlab = 'State'
-#          )
-#ggbarplot(medians_by_state, x='State', y='median_abv')
 
-state_plot = ggplot(medians_by_state, aes(x=medians_by_state$State, y=medians_by_state$median_abv, fill=medians_by_state$State), palette=palette(rainbow(length(levels(medians_by_state$State))))) + geom_bar(stat = "identity") + coord_flip() + labs(x = 'State', y='Median ABV', fill='State') 
-print(state_plot + ggtitle('Median ABV By State') +
+state_plot_abv = ggplot(medians_by_state, aes(x=reorder(medians_by_state$State, median_abv), y=medians_by_state$median_abv, fill=medians_by_state$State), palette=palette(rainbow(length(levels(medians_by_state$State))))) + geom_bar(stat = "identity") + coord_flip() + labs(x = 'State', y='Median ABV', fill='State') 
+
+print(state_plot_abv + ggtitle('Median ABV By State') +
   theme(plot.title = element_text(hjust = 0.5)))
+
+
+state_plot_ibu = ggplot(medians_by_state, aes(x=reorder(medians_by_state$State, median_ibu), y=medians_by_state$median_ibu, fill=medians_by_state$State), palette=palette(rainbow(length(levels(medians_by_state$State))))) + geom_bar(stat = "identity") + coord_flip() + labs(x = 'State', y='Median IBU', fill='State') 
+print(state_plot_ibu + ggtitle('Median IBU By State') +
+  theme(plot.title = element_text(hjust = 0.5)))
+
+
+region_plot_abv = ggplot(medians_by_region, aes(x=reorder(medians_by_region$Region, median_abv), y=medians_by_region$median_abv, fill=medians_by_region$Region), palette=palette(rainbow(length(levels(medians_by_region$Region))))) + geom_bar(stat = "identity") + coord_flip() + labs(x = 'Region', y='Median ABV', fill='Region') 
+
+print(region_plot_abv + ggtitle('Median ABV By Region') +
+  theme(plot.title = element_text(hjust = 0.5)))
+
+
+region_plot_ibu = ggplot(medians_by_region, aes(x=reorder(medians_by_region$Region, median_ibu), y=medians_by_region$median_ibu, fill=medians_by_region$Region), palette=palette(rainbow(length(levels(medians_by_region$Region))))) + geom_bar(stat = "identity") + coord_flip() + labs(x = 'Region', y='Median IBU', fill='Region') 
+print(region_plot_ibu + ggtitle('Median IBU By Region') +
+  theme(plot.title = element_text(hjust = 0.5)))
+
 ```
 
-## most booze beer state
-
+## most boozy beer state
+  
+  Colorado - no surprise here. Colorado is known for its liberal policies surrounding consumption of alcohol and other substances - hence having a beer with the strength of the average glass of wine is not altogether unexpected.
+  
+  Although - if you just want to go to a state and get drunk off of a variety of beers Kentucky may be your best bet with a median ABV > 0.06
+  
 ```{r}
 most_boozy = sqldf('SELECT * FROM merged_data ORDER BY ABV DESC')
 most_boozy = head(most_boozy, 1)
 most_boozy$State
+most_boozy$Name
+most_boozy$ABV
 ```
 
 ## most bitter beer state
+
+   Oregon has the most bitter beer in the sample - the aptly named "Bitter Bitch Imperial IPA" clocking in at a whopping 138 IBU!
+   
+   BUT the most bitter beer on average in the sample (based off of the median) would be Maine
 
 ```{r}
 most_bitter = sqldf('SELECT * FROM merged_data ORDER BY IBU DESC')
 most_bitter = head(most_bitter, 1)
 most_bitter$State
+most_bitter$Name
+most_bitter$IBU
 ```
 
 ## ABV Summary
 
+    Visual inspection of the ABV data shows a strong positive skew towards the upper end of the range with quite a few outlyers.
+    
 ```{r}
-summary(merged_data$ABV)
+abv_summary = summary(merged_data$ABV)
+abv_summary
+ggboxplot(merged_data$ABV)
+```
 
+## scatter ABV/IBU Data
+
+      SCatter/Regression shows a strong indication of a linear trend between ABV/IBU with higher values for IBU generally correlating to higher ABV content. Since so much of the IBU data is missing - we should impute the values for the missing IBU data with it's average by style
+
+```{r}
+ggscatter(merged_data, x='IBU', y='ABV', color = 'black'
+          , add=c('reg.line')
+          , conf.int = TRUE
+          , title = 'ABV versus IBU')
+
+```
+
+## Lets impute some values and re-run!
+
+    Imputing the average value by style allowed us to better analyze the trend between ABV/IBU in the absence of missing data. Most of the data that was missing is related to Ciders which should be excluded anyway since IBU is not a measure typically associated with that style of beverage.
+```{r}
+imputed_ibu = sqldf('
+
+SELECT m.Name, m.ABV, COALESCE(m.IBU, b.average_ibu) aS Imp_IBU FROM merged_data m LEFT JOIN beers_by_type b ON b.Style = m.Style'
+  
+  
+  
+)
+ggscatter(imputed_ibu, x='Imp_IBU', y='ABV', color = 'black'
+          , add=c('reg.line')
+          , conf.int = TRUE
+          , title = 'ABV versus IBU (imputed)')
 ```
